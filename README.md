@@ -1,5 +1,7 @@
 # Unpacker
 
+[![](https://jitpack.io/v/stevenyomi/unpacker.svg)](https://jitpack.io/#stevenyomi/unpacker)
+
 A Java library to unpack JavaScript code compressed by [packer](http://dean.edwards.name/packer/).
 
 Source code of packer can be found [here](https://github.com/evanw/packer/blob/master/packer.js).

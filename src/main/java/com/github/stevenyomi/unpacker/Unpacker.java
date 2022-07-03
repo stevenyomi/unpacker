@@ -29,6 +29,8 @@ public class Unpacker {
         } else {
             data = splitter.substringBefore("',");
         }
+        if (data.isEmpty()) return "";
+
         final String[] dictionary = splitter.substringBetween("'", "'").split("\\|");
         final int size = dictionary.length;
 
