@@ -6,37 +6,37 @@ import java.util.regex.Pattern;
 public class Unpacker {
 
     public static String unpack(String script) {
-        return unpack(new ProgressiveSplitter(script), null, null);
+        return unpack(new ProgressiveParser(script), null, null);
     }
 
     public static String unpack(String script, String left, String right) {
-        return unpack(new ProgressiveSplitter(script), left, right);
+        return unpack(new ProgressiveParser(script), left, right);
     }
 
-    public static String unpack(ProgressiveSplitter script) {
+    public static String unpack(ProgressiveParser script) {
         return unpack(script, null, null);
     }
 
-    public static String unpack(ProgressiveSplitter script, String left, String right) {
+    public static String unpack(ProgressiveParser script, String left, String right) {
         final String packed = script
                 .substringBetween("p}('", ".split('|'),0,{}))")
                 .replace("\\'", "\"");
-        final ProgressiveSplitter splitter = new ProgressiveSplitter(packed);
+        final ProgressiveParser parser = new ProgressiveParser(packed);
         final String data;
         if (left != null && right != null) {
-            data = splitter.substringBetween(left, right);
-            splitter.consumeTo("',");
+            data = parser.substringBetween(left, right);
+            parser.consumeTo("',");
         } else {
-            data = splitter.substringBefore("',");
+            data = parser.substringBefore("',");
         }
         if (data.isEmpty()) return "";
 
-        final String[] dictionary = splitter.substringBetween("'", "'").split("\\|");
+        final String[] dictionary = parser.substringBetween("'", "'").split("\\|");
         final int size = dictionary.length;
 
         // https://stackoverflow.com/questions/38376584/
         final StringBuilder builder = new StringBuilder(data.length());
-        final Matcher matcher = Pattern.compile("\\w+").matcher(data);
+        final Matcher matcher = wordRegex.matcher(data);
         int lastAppendPosition = 0;
         while (matcher.find()) {
             builder.append(data, lastAppendPosition, matcher.start());
@@ -53,6 +53,8 @@ public class Unpacker {
         builder.append(data, lastAppendPosition, data.length());
         return builder.toString();
     }
+
+    private static final Pattern wordRegex = Pattern.compile("\\w+");
 
     public static int parseRadix62(String str) {
         int result = 0;

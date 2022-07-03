@@ -14,7 +14,7 @@ Implementations of the classes are meant to be efficient, so be careful of edge 
 Unpacker.unpack(script[, left, right])
 ```
 
-- **script** can be either `String` or `ProgressiveSplitter`
+- **script** can be either `String` or `ProgressiveParser`
 - specify **left** and **right** to unpack only the data between them
 
 Note: single quotes `\'` in the data will be replaced with double quotes `"`.
