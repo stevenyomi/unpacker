@@ -19,7 +19,7 @@ public class Unpacker {
 
     public static String unpack(ProgressiveParser script, String left, String right) {
         final String packed = script
-                .substringBetween("p}('", ".split('|'),0,{}))")
+                .substringBetween("}('", ".split('|'),0,{}))")
                 .replace("\\'", "\"");
         final ProgressiveParser parser = new ProgressiveParser(packed);
         final String data;
