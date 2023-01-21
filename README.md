@@ -2,6 +2,8 @@
 
 [![](https://jitpack.io/v/stevenyomi/unpacker.svg)](https://jitpack.io/#stevenyomi/unpacker)
 
+**Moved to https://github.com/tachiyomiorg/tachiyomi-extensions/tree/master/lib/unpacker**
+
 A Java library to unpack JavaScript code compressed by [packer](http://dean.edwards.name/packer/).
 
 Source code of packer can be found [here](https://github.com/evanw/packer/blob/master/packer.js).
